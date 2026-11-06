@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100e">
+  <title>Boighor — Digital Library</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">ব</span><span>বইঘর<small>THE DIGITAL LIBRARY</small></span></a>
+    <nav><a href="#library">লাইব্রেরি</a><a href="#submit">বই জমা</a><button id="authOpen" class="outline">লগইন</button></nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">A HOME FOR EVERY STORY</div>
+      <h1>প্রতিটি বইয়ের<br><em>একটি আপন ঘর।</em></h1>
+      <p>পড়ুন, আবিষ্কার করুন, নিজের লেখা জমা দিন। আপনার ব্যক্তিগত সংগ্রহ থাকবে আলাদা সুরক্ষায়।</p>
+      <a class="gold-button" href="#library">লাইব্রেরি ঘুরে দেখুন <span>↗</span></a>
+      <div class="hero-stamp">EST. 2026<br>BOIGHOR</div>
+    </section>
+
+    <section class="section" id="library">
+      <div class="section-head"><div><div class="eyebrow">OPEN COLLECTION</div><h2>সবার জন্য বই</h2></div><span class="muted">অনুমোদিত বইয়ের সংগ্রহ</span></div>
+      <div class="toolbar"><input id="search" placeholder="বই বা লেখকের নাম খুঁজুন..."><select id="category"><option value="">সব বিভাগ</option><option>উপন্যাস</option><option>গল্প</option><option>কবিতা</option><option>রহস্য</option><option>অন্যান্য</option></select></div>
+      <div id="publicBooks" class="book-grid"><div class="empty">লাইব্রেরি লোড হচ্ছে...</div></div>
+    </section>
+
+    <section class="private-banner">
+      <div class="lock-icon">✦</div><div><div class="eyebrow">PERSONAL COLLECTION</div><h2>আমার ব্যক্তিগত তাক</h2><p>শুধু লাইব্রেরি অ্যাডমিনের অনুমোদিত লগইনে দেখা যাবে।</p></div>
+      <button id="privateOpen" class="outline light">ব্যক্তিগত লাইব্রেরি ↗</button>
+    </section>
+
+    <section class="section submit-section" id="submit">
+      <div class="section-head"><div><div class="eyebrow">CONTRIBUTE A STORY</div><h2>আপনার বই জমা দিন</h2></div></div>
+      <p class="muted">আপনার বই পর্যালোচনার পর অনুমোদিত হলে সবার জন্য প্রকাশ করা হবে। নিজের লেখা বা প্রকাশের অনুমতি আছে—এমন বই জমা দিন।</p>
+      <form id="submitForm" class="form-grid">
+        <input name="title" placeholder="বইয়ের নাম" required>
+        <input name="author" placeholder="লেখকের নাম" required>
+        <select name="category" required><option value="">বিভাগ নির্বাচন</option><option>উপন্যাস</option><option>গল্প</option><option>কবিতা</option><option>রহস্য</option><option>অন্যান্য</option></select>
+        <input name="description" placeholder="বই সম্পর্কে সংক্ষিপ্ত পরিচিতি">
+        <input name="file" type="file" accept="application/pdf" required>
+        <button class="gold-button" type="submit">রিভিউয়ের জন্য জমা দিন ↗</button>
+      </form>
+      <p id="submitMsg" class="form-message"></p>
+    </section>
+  </main>
+
+  <footer><span class="brand">বইঘর</span><span>গল্পের জন্য, পাঠকের জন্য।</span><span>© 2026 BOIGHOR</span></footer>
+
+  <dialog id="authDialog">
+    <form method="dialog" class="dialog-close"><button aria-label="বন্ধ করুন">×</button></form>
+    <div class="eyebrow">MEMBER ACCESS</div><h2>লগইন / অ্যাকাউন্ট</h2>
+    <p class="muted">বই জমা দিতে বা ব্যক্তিগত লাইব্রেরিতে ঢুকতে লগইন করুন।</p>
+    <form id="authForm" class="stack">
+      <input name="email" type="email" placeholder="ইমেইল" required>
+      <input name="password" type="password" placeholder="পাসওয়ার্ড" minlength="8" required>
+      <div class="two"><button class="gold-button" type="submit" data-mode="login">লগইন</button><button class="outline" type="button" id="signup">নতুন অ্যাকাউন্ট</button></div>
+    </form><p id="authMsg" class="form-message"></p>
+  </dialog>
+
+  <dialog id="privateDialog">
+    <form method="dialog" class="dialog-close"><button aria-label="বন্ধ করুন">×</button></form>
+    <div class="eyebrow">PRIVATE SHELF</div><h2>ব্যক্তিগত বই</h2>
+    <p class="muted">এই তাকটি শুধু অ্যাডমিন অ্যাকাউন্টে প্রবেশযোগ্য। সাধারণ সদস্যের লগইন যথেষ্ট নয়।</p>
+    <div id="privateBooks" class="book-grid"></div><p id="privateMsg" class="form-message"></p>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
